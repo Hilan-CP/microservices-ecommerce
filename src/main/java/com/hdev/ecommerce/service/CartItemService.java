@@ -10,6 +10,7 @@ import com.hdev.ecommerce.repository.CartItemRepository;
 import com.hdev.ecommerce.repository.ProductRepository;
 import com.hdev.ecommerce.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.List;
@@ -27,6 +28,7 @@ public class CartItemService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     public CartItemDTO addItem(Long userId, CartItemRequestDTO dto){
         Product product = productRepository.findById(dto.getProductId())
                 .orElseThrow(() -> new IllegalArgumentException("product not found"));
@@ -57,6 +59,7 @@ public class CartItemService {
         return CartItemMapper.toDto(item);
     }
 
+    @Transactional
     public void removeItem(Long userId, Long productId){
         User user = new User(userId, null, null, null, null, null, null, null, null);
         Product product = new Product(productId, null, null, null, null, null, true, null, null);
@@ -65,11 +68,13 @@ public class CartItemService {
         cartItemRepository.delete(item);
     }
 
+    @Transactional(readOnly = true)
     public List<CartItemDTO> getUserCart(Long userId){
         List<CartItem> items = cartItemRepository.findByUserId(userId);
         return items.stream().map(item -> CartItemMapper.toDto(item)).toList();
     }
 
+    @Transactional
     public void clearUserCart(Long userId){
         List<CartItem> items = cartItemRepository.findByUserId(userId);
         if(items.isEmpty()){
