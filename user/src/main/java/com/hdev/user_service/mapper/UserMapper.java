@@ -4,7 +4,6 @@ import com.hdev.user_service.dto.UserDTO;
 import com.hdev.user_service.dto.UserRequestDTO;
 import com.hdev.user_service.entity.Address;
 import com.hdev.user_service.entity.User;
-import com.hdev.user_service.mapper.AddressMapper;
 
 public class UserMapper {
     public static User toEntity(UserRequestDTO dto, User entity){

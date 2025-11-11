@@ -1,40 +1,34 @@
 package com.hdev.user_service.entity;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
 import java.util.Objects;
 
-@Entity
-@Table(name = "tb_user")
+@Document(collection = "users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private String firstName;
     private String lastName;
 
-    @Column(unique = true)
+    @Indexed(unique = true)
     private String email;
 
     private String phone;
-
-    @Enumerated(EnumType.STRING)
     private UserRole role;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", nullable = false)
     private Address address;
-
     private Instant createdAt;
     private Instant updatedAt;
 
     public User() {
     }
 
-    public User(Long id, String firstName, String lastName, String email, String phone, UserRole role, Address address, Instant createdAt, Instant updatedAt) {
+    public User(String id, String firstName, String lastName, String email, String phone, UserRole role, Address address, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -46,11 +40,11 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

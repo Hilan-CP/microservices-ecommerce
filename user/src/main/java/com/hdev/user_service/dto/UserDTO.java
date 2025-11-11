@@ -5,7 +5,7 @@ import com.hdev.user_service.entity.UserRole;
 import java.time.Instant;
 
 public class UserDTO {
-    private Long id;
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
@@ -18,7 +18,7 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(Long id, String firstName, String lastName, String email, String phone, UserRole role, AddressDTO address, Instant createdAt, Instant updatedAt) {
+    public UserDTO(String id, String firstName, String lastName, String email, String phone, UserRole role, AddressDTO address, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -30,11 +30,11 @@ public class UserDTO {
         this.updatedAt = updatedAt;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

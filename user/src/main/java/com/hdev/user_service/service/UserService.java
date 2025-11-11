@@ -22,7 +22,7 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public UserDTO getUserById(Long id) {
+    public UserDTO getUserById(String id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND));
         return UserMapper.toUserDTO(user);
@@ -44,7 +44,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO updateUser(Long id, UserRequestDTO dto) {
+    public UserDTO updateUser(String id, UserRequestDTO dto) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND));
         user = UserMapper.toEntity(dto, user);

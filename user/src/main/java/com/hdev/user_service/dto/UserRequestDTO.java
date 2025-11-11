@@ -1,7 +1,5 @@
 package com.hdev.user_service.dto;
 
-import com.hdev.user_service.dto.AddressDTO;
-
 public class UserRequestDTO {
     private String firstName;
     private String lastName;

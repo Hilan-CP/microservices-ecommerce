@@ -1,16 +1,13 @@
 package com.hdev.user_service.entity;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
 
-@Entity
-@Table(name = "tb_address")
 public class Address {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private String street;
     private String city;
@@ -21,7 +18,7 @@ public class Address {
     public Address() {
     }
 
-    public Address(Long id, String street, String city, String state, String country, String zipcode) {
+    public Address(String id, String street, String city, String state, String country, String zipcode) {
         this.id = id;
         this.street = street;
         this.city = city;
@@ -30,11 +27,11 @@ public class Address {
         this.zipcode = zipcode;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

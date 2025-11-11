@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres
+    container_name: ecommerce_postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=hdev
+      - POSTGRES_PASSWORD=123456
+    volumes:
+      - /ecommerce/data/postgres
+
+  mongodb:
+    image: mongo
+    container_name: ecommerce_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - /ecommerce/data/mongodb
