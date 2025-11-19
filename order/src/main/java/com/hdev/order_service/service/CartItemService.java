@@ -17,14 +17,14 @@ import java.util.Optional;
 
 @Service
 public class CartItemService {
-    private static final String PRODUCT_HOST = "http://localhost:8082";
-    private static final String USER_HOST = "http://localhost:8081";
+    private static final String PRODUCT_HOST = "http://product-service";
+    private static final String USER_HOST = "http://user-service";
     private final CartItemRepository cartItemRepository;
     private final RestTemplate restTemplate;
 
-    public CartItemService(CartItemRepository cartItemRepository) {
+    public CartItemService(CartItemRepository cartItemRepository, RestTemplate restTemplate) {
         this.cartItemRepository = cartItemRepository;
-        this.restTemplate = new RestTemplate();
+        this.restTemplate = restTemplate;
     }
 
     @Transactional
