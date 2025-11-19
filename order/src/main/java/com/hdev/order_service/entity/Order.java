@@ -20,7 +20,7 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    private Long userId;
+    private String userId;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> items = new ArrayList<>();
@@ -31,7 +31,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long id, BigDecimal total, OrderStatus status, Long userId, Instant createdAt, Instant updatedAt) {
+    public Order(Long id, BigDecimal total, OrderStatus status, String userId, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.total = total;
         this.status = status;
@@ -64,11 +64,11 @@ public class Order {
         this.status = status;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

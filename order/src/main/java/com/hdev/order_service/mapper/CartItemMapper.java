@@ -11,7 +11,7 @@ public class CartItemMapper {
                 entity.getProductId(),
                 entity.getPrice(),
                 entity.getQuantity(),
-                entity.getCreated_at(),
-                entity.getUpdated_at());
+                entity.getCreatedAt(),
+                entity.getUpdatedAt());
     }
 }

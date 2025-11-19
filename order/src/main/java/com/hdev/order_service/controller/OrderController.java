@@ -21,7 +21,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<OrderDTO> createOrder(@RequestHeader(name = "X-User-Id") Long userId){
+    public ResponseEntity<OrderDTO> createOrder(@RequestHeader(name = "X-User-Id") String userId){
         OrderDTO order = service.createOrder(userId);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").build(order.getId());
         return ResponseEntity.created(uri).body(order);

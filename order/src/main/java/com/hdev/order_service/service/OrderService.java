@@ -25,7 +25,7 @@ public class OrderService {
     }
 
     @Transactional
-    public OrderDTO createOrder(Long userId) {
+    public OrderDTO createOrder(String userId) {
         List<CartItemDTO> cartItems = cartItemService.getUserCart(userId);
         if (cartItems.isEmpty()) {
             throw new IllegalArgumentException("cart is empty");

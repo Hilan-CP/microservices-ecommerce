@@ -11,7 +11,7 @@ public class OrderDTO {
     private Long id;
     private BigDecimal total;
     private OrderStatus status;
-    private Long userId;
+    private String userId;
     private Instant createdAt;
     private Instant updatedAt;
     private List<OrderItemDTO> items = new ArrayList<>();
@@ -19,7 +19,7 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
-    public OrderDTO(Long id, BigDecimal total, OrderStatus status, Long userId, Instant createdAt, Instant updatedAt) {
+    public OrderDTO(Long id, BigDecimal total, OrderStatus status, String userId, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.total = total;
         this.status = status;
@@ -52,11 +52,11 @@ public class OrderDTO {
         this.status = status;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

@@ -19,6 +19,12 @@ public class ProductController {
         this.service = service;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id){
+        ProductDTO product = service.getProductById(id);
+        return ResponseEntity.ok(product);
+    }
+
     @GetMapping("/search")
     public ResponseEntity<List<ProductDTO>> getProductByName(@RequestParam(required = true) String name){
         List<ProductDTO> products = service.getProductsByName(name);

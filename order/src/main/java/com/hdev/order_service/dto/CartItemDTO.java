@@ -5,7 +5,7 @@ import java.time.Instant;
 
 public class CartItemDTO {
     private Long id;
-    private Long userId;
+    private String userId;
     private Long productId;
     private BigDecimal price;
     private Integer quantity;
@@ -15,7 +15,7 @@ public class CartItemDTO {
     public CartItemDTO() {
     }
 
-    public CartItemDTO(Long id, Long userId, Long productId, BigDecimal price, Integer quantity, Instant created_at, Instant updated_at) {
+    public CartItemDTO(Long id, String userId, Long productId, BigDecimal price, Integer quantity, Instant created_at, Instant updated_at) {
         this.id = id;
         this.userId = userId;
         this.productId = productId;
@@ -33,11 +33,11 @@ public class CartItemDTO {
         this.id = id;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

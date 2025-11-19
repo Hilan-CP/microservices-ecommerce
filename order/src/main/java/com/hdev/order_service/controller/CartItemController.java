@@ -18,25 +18,25 @@ public class CartItemController {
     }
 
     @PostMapping
-    public ResponseEntity<CartItemDTO> addItem(@RequestHeader(name = "X-User-Id") Long userId, @RequestBody CartItemRequestDTO dto){
+    public ResponseEntity<CartItemDTO> addItem(@RequestHeader(name = "X-User-Id") String userId, @RequestBody CartItemRequestDTO dto){
         CartItemDTO item = service.addItem(userId, dto);
         return ResponseEntity.ok(item);
     }
 
     @DeleteMapping("/{productId}")
-    public ResponseEntity<Void> removeItem(@RequestHeader(name = "X-User-Id") Long userId, @PathVariable Long productId){
+    public ResponseEntity<Void> removeItem(@RequestHeader(name = "X-User-Id") String userId, @PathVariable Long productId){
         service.removeItem(userId, productId);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<CartItemDTO>> getUserCart(@RequestHeader(name = "X-User-Id") Long userId){
+    public ResponseEntity<List<CartItemDTO>> getUserCart(@RequestHeader(name = "X-User-Id") String userId){
         List<CartItemDTO> items = service.getUserCart(userId);
         return ResponseEntity.ok(items);
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> clearUserCart(@RequestHeader(name = "X-User-Id") Long userId){
+    public ResponseEntity<Void> clearUserCart(@RequestHeader(name = "X-User-Id") String userId){
         service.clearUserCart(userId);
         return ResponseEntity.noContent().build();
     }

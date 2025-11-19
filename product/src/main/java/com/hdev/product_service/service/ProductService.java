@@ -24,6 +24,13 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
+    public ProductDTO getProductById(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("not found"));
+        return ProductMapper.toDto(product);
+    }
+
+    @Transactional(readOnly = true)
     public List<ProductDTO> getProductsByName(String name){
         List<Product> products = productRepository.findByNameContainingIgnoreCase(name);
         return products.stream().map(product -> ProductMapper.toDto(product)).toList();

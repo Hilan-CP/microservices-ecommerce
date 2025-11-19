@@ -14,24 +14,24 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;
+    private String userId;
     private Long productId;
     private BigDecimal price;
     private Integer quantity;
-    private Instant created_at;
-    private Instant updated_at;
+    private Instant createdAt;
+    private Instant updatedAt;
 
     public CartItem() {
     }
 
-    public CartItem(Long id, Long userId, Long productId, BigDecimal price, Integer quantity, Instant created_at, Instant updated_at) {
+    public CartItem(Long id, String userId, Long productId, BigDecimal price, Integer quantity, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.userId = userId;
         this.productId = productId;
         this.price = price;
         this.quantity = quantity;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Long getId() {
@@ -42,11 +42,11 @@ public class CartItem {
         this.id = id;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -74,20 +74,20 @@ public class CartItem {
         this.quantity = quantity;
     }
 
-    public Instant getCreated_at() {
-        return created_at;
+    public Instant getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(Instant created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Instant getUpdated_at() {
-        return updated_at;
+    public Instant getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdated_at(Instant updated_at) {
-        this.updated_at = updated_at;
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override
