@@ -17,3 +17,9 @@ services:
       - "27017:27017"
     volumes:
       - /ecommerce/data/mongodb
+
+  redis:
+    image: redis
+    container_name: ecommerce_redis
+    ports:
+      - "6379:6379"
