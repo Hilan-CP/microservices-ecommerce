@@ -23,3 +23,10 @@ services:
     container_name: ecommerce_redis
     ports:
       - "6379:6379"
+
+  rabbitmq:
+    image: rabbitmq:4.1.6-management
+    container_name: ecommerce_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"

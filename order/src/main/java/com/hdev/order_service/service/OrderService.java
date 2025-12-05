@@ -3,10 +3,12 @@ package com.hdev.order_service.service;
 import com.hdev.order_service.dto.CartItemDTO;
 import com.hdev.order_service.dto.OrderDTO;
 import com.hdev.order_service.entity.Order;
-import com.hdev.order_service.mapper.OrderMapper;
-import com.hdev.order_service.repository.OrderRepository;
 import com.hdev.order_service.entity.OrderItem;
 import com.hdev.order_service.entity.OrderStatus;
+import com.hdev.order_service.mapper.OrderMapper;
+import com.hdev.order_service.repository.OrderRepository;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,10 +20,18 @@ import java.util.List;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final CartItemService cartItemService;
+    private final RabbitTemplate rabbitTemplate;
 
-    public OrderService(OrderRepository orderRepository, CartItemService cartItemService) {
+    @Value("${rabbitmq.exchange.name}")
+    private String exchangeName;
+
+    @Value("${rabbitmq.routing.key}")
+    private String routingKey;
+
+    public OrderService(OrderRepository orderRepository, CartItemService cartItemService, RabbitTemplate rabbitTemplate) {
         this.orderRepository = orderRepository;
         this.cartItemService = cartItemService;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     @Transactional
@@ -48,6 +58,8 @@ public class OrderService {
         order.setTotal(total);
         order = orderRepository.save(order);
         cartItemService.clearUserCart(userId);
-        return OrderMapper.toDto(order);
+        OrderDTO orderDto = OrderMapper.toDto(order);
+        rabbitTemplate.convertAndSend(exchangeName, routingKey, orderDto);
+        return orderDto;
     }
 }
