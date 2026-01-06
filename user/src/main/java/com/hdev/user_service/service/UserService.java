@@ -40,6 +40,7 @@ public class UserService {
     public UserDTO createUser(UserRequestDTO dto) {
         String token = keycloakAdminService.getAdminToken();
         String keycloakUserId = keycloakAdminService.createUser(token, dto);
+        keycloakAdminService.assignRole(token, keycloakUserId, UserRole.CUSTOMER.toString());
         User user = UserMapper.toEntity(dto, new User());
         user.setRole(UserRole.CUSTOMER);
         user.setCreatedAt(Instant.now());

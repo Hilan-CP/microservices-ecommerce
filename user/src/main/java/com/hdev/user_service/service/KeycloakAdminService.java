@@ -56,4 +56,36 @@ public class KeycloakAdminService {
         String uri = response.getHeaders().getLocation().getPath();
         return uri.substring(uri.lastIndexOf("/") + 1);
     }
+
+    public void assignRole(String token, String keycloakUserId, String roleName){
+        Map<String, Object> roleRepresentation = getRoleRepresentation(token, roleName);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<List<Map<String, Object>>> http = new HttpEntity<>(List.of(roleRepresentation), headers);
+        ResponseEntity<Object> response = restTemplate.postForEntity(
+                "http://localhost:8999/admin/realms/ecommerce/users/{userId}/role-mappings/clients/de9a377b-9b33-4aab-90ed-666e4e89ca5e",
+                http,
+                Object.class,
+                keycloakUserId);
+        if(!response.getStatusCode().is2xxSuccessful()){
+            throw new RuntimeException("Could assign role to user " + keycloakUserId);
+        }
+    }
+
+    private Map<String, Object> getRoleRepresentation(String token, String roleName){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token);
+        HttpEntity<Map<String, Object>> http = new HttpEntity<>(headers);
+        ResponseEntity<Map> response = restTemplate.exchange(
+                "http://localhost:8999/admin/realms/ecommerce/clients/de9a377b-9b33-4aab-90ed-666e4e89ca5e/roles/{role}",
+                HttpMethod.GET,
+                http,
+                Map.class,
+                roleName);
+        if(!response.getStatusCode().is2xxSuccessful()){
+            throw new RuntimeException("Could not find role " + roleName);
+        }
+        return response.getBody();
+    }
 }
