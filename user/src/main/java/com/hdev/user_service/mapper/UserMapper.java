@@ -18,6 +18,7 @@ public class UserMapper {
     public static UserDTO toUserDTO(User entity){
         return new UserDTO(
                 entity.getId(),
+                entity.getKeycloakId(),
                 entity.getFirstName(),
                 entity.getLastName(),
                 entity.getEmail(),

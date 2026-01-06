@@ -13,6 +13,7 @@ public class User {
     @Id
     private String id;
 
+    private String keycloakId;
     private String firstName;
     private String lastName;
 
@@ -28,8 +29,9 @@ public class User {
     public User() {
     }
 
-    public User(String id, String firstName, String lastName, String email, String phone, UserRole role, Address address, Instant createdAt, Instant updatedAt) {
+    public User(String id, String keycloakId, String firstName, String lastName, String email, String phone, UserRole role, Address address, Instant createdAt, Instant updatedAt) {
         this.id = id;
+        this.keycloakId = keycloakId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -46,6 +48,14 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getKeycloakId() {
+        return keycloakId;
+    }
+
+    public void setKeycloakId(String keycloakId) {
+        this.keycloakId = keycloakId;
     }
 
     public String getFirstName() {

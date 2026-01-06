@@ -16,9 +16,11 @@ import java.util.List;
 public class UserService {
     private static String NOT_FOUND = "Resource Not Found";
     private final UserRepository userRepository;
+    private final KeycloakAdminService keycloakAdminService;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, KeycloakAdminService keycloakAdminService) {
         this.userRepository = userRepository;
+        this.keycloakAdminService = keycloakAdminService;
     }
 
     @Transactional(readOnly = true)
@@ -36,9 +38,12 @@ public class UserService {
 
     @Transactional
     public UserDTO createUser(UserRequestDTO dto) {
+        String token = keycloakAdminService.getAdminToken();
+        String keycloakUserId = keycloakAdminService.createUser(token, dto);
         User user = UserMapper.toEntity(dto, new User());
         user.setRole(UserRole.CUSTOMER);
         user.setCreatedAt(Instant.now());
+        user.setKeycloakId(keycloakUserId);
         userRepository.save(user);
         return UserMapper.toUserDTO(user);
     }

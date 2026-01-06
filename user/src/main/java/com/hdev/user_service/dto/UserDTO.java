@@ -6,6 +6,7 @@ import java.time.Instant;
 
 public class UserDTO {
     private String id;
+    private String keycloakId;
     private String firstName;
     private String lastName;
     private String email;
@@ -18,8 +19,9 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(String id, String firstName, String lastName, String email, String phone, UserRole role, AddressDTO address, Instant createdAt, Instant updatedAt) {
+    public UserDTO(String id, String keycloakId, String firstName, String lastName, String email, String phone, UserRole role, AddressDTO address, Instant createdAt, Instant updatedAt) {
         this.id = id;
+        this.keycloakId = keycloakId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -36,6 +38,14 @@ public class UserDTO {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getKeycloakId() {
+        return keycloakId;
+    }
+
+    public void setKeycloakId(String keycloakId) {
+        this.keycloakId = keycloakId;
     }
 
     public String getFirstName() {
